@@ -68,4 +68,5 @@ Evaluating Plot
 PS_model.plot_smd()
 ```
 Output:
+
 ![output2](output/smd.png)
