@@ -10,7 +10,7 @@ Overall, propensity score matching is a useful tool for researchers to make caus
 
 # Installation Guide
 Will be uploaded to pypi soon,
-For temporary usaga, download the matching.py, put on your project directory and import it like the code
+For temporary usaga, download the matching.py from **tsel_aagm** directory, put on your project directory and import it like the code
 ```python
 from matching import PropensityScoreMatch
 ```
