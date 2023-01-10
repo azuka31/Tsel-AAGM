@@ -9,7 +9,11 @@ The idea behind propensity score matching is to balance the characteristics of t
 Overall, propensity score matching is a useful tool for researchers to make causal inferences in observational studies, although it is important to consider the limitations and assumptions of this method.
 
 # Installation Guide
-Will be uploaded to pypi soon
+Will be uploaded to pypi soon,
+For temporary usaga, download the matching.py, put on your project directory and import it like the code
+```python
+from matching import PropensityScoreMatch
+```
 
 # Requirements Library
 This python requires related package more importantly python_requires='>=3.1', so that package can be install Make sure the other packages meet the requirements below
