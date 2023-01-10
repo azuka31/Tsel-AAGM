@@ -39,7 +39,7 @@ Importing libraries
 ```python
 import pandas as pd
 import matplotlib.pyplot as plt
-from propensity_score import PropensityScoreMatch
+from matching import PropensityScoreMatch
 pd.set_option('mode.chained_assignment',None)
 ```
 Initiating model
