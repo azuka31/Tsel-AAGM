@@ -33,3 +33,39 @@ Output:
 
 For Analysis:
 - plot_smd() : plotting the df_smd
+
+# Example Usage
+Importing libraries
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+from propensity_score import PropensityScoreMatch
+pd.set_option('mode.chained_assignment',None)
+```
+Initiating model
+```python
+# Importing Data
+takers = pd.read_csv('takers_mendadakhepi.csv').fillna(0)
+nontakers = pd.read_csv('nontakers_mendadakhepi.csv').fillna(0)
+takers['label'] = 1
+nontakers['label'] = 0
+df_main = pd.concat([takers, nontakers], ignore_index=True)
+
+# Defining Variable
+features = ['last_balance_24','last_poin_24','rev_data_package_aft','payload_bef']
+treatment = 'label'
+outcome = 'rev_data_package_aft'
+
+# Propensity Score Model
+PS_model = PropensityScoreMatch(df_main, features, treatment, outcome)
+PS_model.df_TE.head()
+```
+Output:
+![output2](output/df_te.png)
+
+Evaluating Plot
+```python
+PS_model.plot_smd()
+```
+Output:
+![output2](output/smd.png)
