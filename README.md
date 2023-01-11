@@ -49,8 +49,8 @@ pd.set_option('mode.chained_assignment',None)
 Initiating model
 ```python
 # Importing Data
-takers = pd.read_csv('takers_mendadakhepi.csv').fillna(0)
-nontakers = pd.read_csv('nontakers_mendadakhepi.csv').fillna(0)
+takers = pd.read_csv('takers_programname.csv').fillna(0)
+nontakers = pd.read_csv('nontakers_programname.csv').fillna(0)
 takers['label'] = 1
 nontakers['label'] = 0
 df_main = pd.concat([takers, nontakers], ignore_index=True)
