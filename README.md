@@ -56,9 +56,9 @@ nontakers['label'] = 0
 df_main = pd.concat([takers, nontakers], ignore_index=True)
 
 # Defining Variable
-features = ['last_balance_24','last_poin_24','rev_data_package_aft','payload_bef']
+features = ['var1','var2','var3']
 treatment = 'label'
-outcome = 'rev_data_package_aft'
+outcome = 'out1'
 
 # Propensity Score Model
 PS_model = PropensityScoreMatch(df_main, features, treatment, outcome)
