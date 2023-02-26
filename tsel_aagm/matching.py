@@ -13,24 +13,63 @@ plt.style.use('seaborn')
 
 class PropensityScoreMatch:
     '''
-    Matching Propensity Score and Treatment Effect
+    PropensityScoreMatch is a class for matching propensity score and treatment effect.
 
-    Input
-    -----
-    - features : in list type
-    - treatment : in string type
-    - outcome : in string type
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        The input data frame.
+    features : list
+        A list of features to be used for matching.
+    treatment : str
+        The treatment column name.
+    outcome : str
+        The outcome column name.
 
-    Output
-    ------
-    - df_matched
-    - df_TE
-    
-    For analysis
-    ------------
-    - plot_smd()
-    - plot_individual_treatment()
+    Attributes
+    ----------
+    df : pandas.DataFrame
+        The input data frame.
+    features : list
+        A list of features to be used for matching.
+    treatment : str
+        The treatment column name.
+    outcome : str
+        The outcome column name.
+    df_matched : pandas.DataFrame
+        The matched data frame.
+    df_smd : pandas.DataFrame
+        The standardized mean difference data frame.
+    df_TE : pandas.DataFrame
+        The treatment effect data frame.
+
+    Methods
+    -------
+    check_data_types()
+        Check if the data types of features, treatment and outcome are correct.
+    logistic_regression()
+        Calculate propensity score using logistic regression.
+    matching_score()
+        Match the treated and control groups using nearest neighbors.
+    plot_smd()
+        Plot standardized mean difference for each feature.
+    plot_individual_treatment()
+        Plot the treatment effect for each individual.
+    linear_regression()
+        Calculate the treatment effect using linear regression.
+    calculate_treatment_effect()
+        Calculate the treatment effect for each feature.
+    calculate_smd()
+        Calculate the standardized mean difference for each feature.
+
+    Example
+    -------
+    df = pd.read_csv('data.csv')
+    psm = PropensityScoreMatch(df, ['feature_1', 'feature_2'], 'treatment', 'outcome')
+    psm.plot_smd()
+    psm.plot_individual_treatment()
     '''
+    
     def __init__(self, df, features, treatment, outcome):
         # Initiating Variable
         self.df = df
