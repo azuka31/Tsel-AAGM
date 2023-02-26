@@ -9,10 +9,13 @@ The idea behind propensity score matching is to balance the characteristics of t
 Overall, propensity score matching is a useful tool for researchers to make causal inferences in observational studies, although it is important to consider the limitations and assumptions of this method.
 
 # Installation Guide
-Will be uploaded to pypi soon,
-For temporary usaga, download the matching.py from **tsel_aagm** directory, put on your project directory and import it like the code
+This function has been uploaded to pypi so you can type on your prompt as code below
+```bash
+pip install causal-inference-aagm
+```
+Then import the library
 ```python
-from matching import PropensityScoreMatch
+from causalinference_aagm.matching import PropensityScoreMatch
 ```
 
 # Requirements Library
@@ -47,36 +50,82 @@ For Analysis:
 # Example Usage
 Importing libraries
 ```python
+from causalinference_aagm.matching import PropensityScoreMatch as psm
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
-from matching import PropensityScoreMatch
-pd.set_option('mode.chained_assignment',None)
+import seaborn as sns
+plt.style.use('seaborn')
 ```
 Initiating model
 ```python
 # Importing Data
-takers = pd.read_csv('takers_programname.csv').fillna(0)
-nontakers = pd.read_csv('nontakers_programname.csv').fillna(0)
-takers['label'] = 1
-nontakers['label'] = 0
-df_main = pd.concat([takers, nontakers], ignore_index=True)
+df = pd.read_csv('datasets/healtcare_stroke_data.csv')
+def one_hot_encode(df):
+    """
+    One-hot encodes all object data type columns of a Pandas DataFrame.
+    """
+    # Get the object columns
+    obj_cols = df.select_dtypes(include=['object']).columns
+    # One-hot encode the object columns
+    df = pd.get_dummies(df, columns=obj_cols)
+    return df
+
+df = one_hot_encode(df).fillna(0)
+df.head()
+df_model = df[['age','hypertension','heart_disease','bmi','stroke','gender_Male','smoking_status_smokes', 'avg_glucose_level']]
+df_model.head()
 
 # Defining Variable
-features = ['var1','var2','var3']
-treatment = 'label'
-outcome = 'out1'
+features = ['age','hypertension','heart_disease','bmi','gender_Male', 'avg_glucose_level']
+treatment = 'smoking_status_smokes'
+outcome = 'stroke'
 
-# Propensity Score Model
-PS_model = PropensityScoreMatch(df_main, features, treatment, outcome)
-PS_model.df_TE.head()
+# Matching
+model = psm(df_model, features, treatment, outcome)
 ```
 Output:
-![output2](output/df_te.png)
+![output1](output/df.png)
 
 Evaluating Plot
 ```python
-PS_model.plot_smd()
+def hist_all_features(df, features, hue):
+    width = 6*len(features)
+    fig, axes = plt.subplots(ncols=len(features), figsize=(width, 5))
+    for i in range(len(features)):
+        sns.histplot(data=df, x=features[i], ax=axes[i], hue=hue)
+    plt.show()
+```
+```python
+features = ['age','hypertension','heart_disease','bmi','gender_Male','avg_glucose_level','proba']
+hist_all_features(model.df, features, hue='smoking_status_smokes')
 ```
 Output:
+![output2](output/dist_1.png)
 
-![output2](output/smd.png)
+```python
+hist_all_features(model.df_matched, features, hue='smoking_status_smokes')
+```
+![output3](output/dist_2.png)
+
+```python
+fig, axes = plt.subplots(ncols=2, figsize=(12, 5))
+
+# Comparing Stroke Mean without Matching
+stroke_by_treatment = model.df.groupby(treatment)[[outcome]].mean()
+stroke_by_treatment.plot(kind='bar', ax=axes[0], title='Before Matching')
+
+# Comparing Stroke Mean After Matching
+stroke_by_treatment = model.df_matched.groupby(treatment)[[outcome]].mean()
+stroke_by_treatment.plot(kind='bar', ax=axes[1], title='After Matching')
+
+plt.show()
+```
+
+![output4](output/out_1.png)
+
+```python
+model.plot_smd()
+```
+
+![output5](output/smd_1.png)
