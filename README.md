@@ -24,16 +24,20 @@ This python requires related package more importantly python_requires='>=3.1', s
 - statsmodels>=0.8.0
 
 # Usage Guide
-Input:
-- df : dataframe with dependent variables (features), treatement column (binary value), and the outcome. No need identifier, dummy id will be generated to identify matching 
-- features : features should be in list data type. Only numeric columns will be accepted (the categorial will be developed later)
-- treatment : variable in string data type. The column must be in binary value, 1 for tested, 0 for control
-- the outcome : variable in string data type. Only numerice will be accepted
+This is a Python class named PropensityScoreMatch. It is designed to perform propensity score matching, a technique used to balance the distribution of confounding variables between treatment and control groups in observational studies. The class has four input arguments:
 
-Output:
-- df_matched : Additional columns like probability score (ps) and matched_id (based on dummy_id) will be appear, to identify the matched control group
-- df_TE : This dataframe contains Treatment Effect Field, consisting of actual, counterfactual, y0, y1, in y0_y1 (individual treatemnt effect)
-- df_smd : Standard Mean Difference for each features before and after matching
+df: a pandas DataFrame containing the data to be analyzed.
+features: a list of column names in df that contain the variables used to calculate propensity scores.
+treatment: a string that specifies the name of the column in df that contains the treatment variable.
+outcome: a string that specifies the name of the column in df that contains the outcome variable.
+The output of the class is two pandas DataFrames:
+
+df_matched: a DataFrame containing the data for the matched pairs of treated and control observations.
+df_TE: a DataFrame containing the treatment effect estimates for each variable in features.
+In addition to these output DataFrames, the class provides two methods for visualizing the results of the analysis:
+
+plot_smd(): a method that generates a plot of standardized mean differences (SMDs) between the treatment and control groups for each variable in features.
+plot_individual_treatment(): a method that generates a plot of the individual treatment effects for each observation in df_matched.
 
 For Analysis:
 - plot_smd() : plotting the df_smd
