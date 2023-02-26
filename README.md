@@ -30,10 +30,12 @@ This is a Python class named PropensityScoreMatch. It is designed to perform pro
 - features: a list of column names in df that contain the variables used to calculate propensity scores.
 - treatment: a string that specifies the name of the column in df that contains the treatment variable.
 - outcome: a string that specifies the name of the column in df that contains the outcome variable.
+
 The output of the class is two pandas DataFrames:
 
 - df_matched: a DataFrame containing the data for the matched pairs of treated and control observations.
 - df_TE: a DataFrame containing the treatment effect estimates for each variable in features.
+
 In addition to these output DataFrames, the class provides two methods for visualizing the results of the analysis:
 
 - plot_smd(): a method that generates a plot of standardized mean differences (SMDs) between the treatment and control groups for each variable in features.
