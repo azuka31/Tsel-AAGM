@@ -118,7 +118,7 @@ stroke_by_treatment.plot(kind='bar', ax=axes[0], title='Before Matching')
 # Comparing Stroke Mean After Matching
 stroke_by_treatment = model.df_matched.groupby(treatment)[[outcome]].mean()
 stroke_by_treatment.plot(kind='bar', ax=axes[1], title='After Matching')
-
+ 
 plt.show()
 ```
 
