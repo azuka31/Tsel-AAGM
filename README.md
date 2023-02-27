@@ -1,4 +1,4 @@
-# Tsel-AAGM
+# Causal Inference using PSM
 
 
 # Background
