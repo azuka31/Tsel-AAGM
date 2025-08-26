@@ -18,6 +18,12 @@ Then import the library
 from causalinference_aagm.matching import PropensityScoreMatch
 ```
 
+If error, download (matching.py)[tsel_aagm/matching.py]
+then
+```
+from matching import *
+```
+
 # Requirements Library
 This python requires related package more importantly python_requires='>=3.1', so that package can be install Make sure the other packages meet the requirements below
 - pandas>=1.1.5,
