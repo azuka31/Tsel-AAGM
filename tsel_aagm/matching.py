@@ -9,7 +9,6 @@ from statsmodels.stats.multicomp import pairwise_tukeyhsd
 import numpy as np
 import time
 pd.set_option('mode.chained_assignment',None)
-plt.style.use('seaborn')
 
 class PropensityScoreMatch:
     '''

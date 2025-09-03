@@ -130,12 +130,6 @@ plt.show()
 
 ![output4](output/out_1.png)
 
-```python
-model.plot_smd()
-```
-
-![output5](output/smd_1.png)
-
 # Further Analysis
 ---
 Rather than direct comparison between matched test variant and control, you better try use Average Treatment Effect for deeper anaylysis. Here, medium article that I recommend
